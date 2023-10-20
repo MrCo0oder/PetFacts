@@ -20,8 +20,5 @@ class UserInputViewModel : ViewModel() {
         }
     }
 
-    fun isValidScreen(): Boolean {
-        return !uiState.value.name.isNullOrEmpty() && !uiState.value.selectedAnimal.isNullOrEmpty()
-    }
-
+    fun isValidScreen(): Boolean = uiState.value.name.isNotEmpty() && uiState.value.selectedAnimal.isNotEmpty()
 }

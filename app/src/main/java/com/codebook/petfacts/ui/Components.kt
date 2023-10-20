@@ -35,31 +35,32 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codebook.petfacts.R
+import com.codebook.petfacts.Utils
 
 @Composable
-fun HeaderText(text: String) {
+fun HeaderText(text: String, image: Int = R.drawable.image) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
+            modifier = Modifier.weight(1f),
             text = text,
             color = Color.Black,
             fontSize = 24.sp,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Medium, overflow = TextOverflow.Ellipsis, maxLines = 1,
         )
-        Spacer(modifier = Modifier.weight(1f))
-
         Image(
             modifier = Modifier
-                .size(65.dp),
-            painter = painterResource(id = R.mipmap.ic_launcher_foreground),
+                .size(50.dp),
+            painter = painterResource(id = image),
             contentDescription = "", contentScale = ContentScale.FillBounds
         )
     }
@@ -67,7 +68,7 @@ fun HeaderText(text: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun HeaderTextPreview() {
+private fun HeaderTextPreview() {
     HeaderText("Hi There! 😊")
 }
 
@@ -84,21 +85,21 @@ fun SubHeader(text: String, textSize: TextUnit, color: Color = Color.Black) {
 
 @Preview(showBackground = true)
 @Composable
-fun SubHeaderPreview() {
+private fun SubHeaderPreview() {
     SubHeader("Hi There! 😊", 24.sp)
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldComponent(
     label: String,
     labelSize: TextUnit,
     labelColor: Color = Color.Black,
+    default: String,
     onValueChange: (String) -> Unit
 ) {
     var value by remember {
-        mutableStateOf("")
+        mutableStateOf(default)
     }
     val localFocusManager = LocalFocusManager.current
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -111,10 +112,10 @@ fun TextFieldComponent(
         Spacer(modifier = Modifier.height(10.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = value,
+            value = value.trim(),
             onValueChange = {
-                value = it
-                onValueChange(it)
+                value = it.trim()
+                onValueChange(it.trim())
             },
             placeholder = {
                 Text(text = "Enter your name", fontSize = 18.sp)
@@ -137,8 +138,8 @@ fun TextFieldComponent(
 
 @Preview(showBackground = true)
 @Composable
-fun TextFieldComponentPreview() {
-    TextFieldComponent("Name", 18.sp) {}
+private fun TextFieldComponentPreview() {
+    TextFieldComponent("Name", 18.sp, default = "") {}
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -146,7 +147,7 @@ fun TextFieldComponentPreview() {
 fun SelectableCard(image: Int, isSelected: Boolean, onClick: (String) -> Unit) {
     Card(
         onClick = {
-            val selectedAnimal = if (image == R.drawable.cat) "Cat" else "Dog"
+            val selectedAnimal = if (image == R.drawable.cat) Utils.CAT else Utils.DOG
             onClick(selectedAnimal)
         },
         modifier = Modifier
@@ -178,7 +179,7 @@ fun SelectableCard(image: Int, isSelected: Boolean, onClick: (String) -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun SelectableCardPreview() {
+private fun SelectableCardPreview() {
     SelectableCard(R.drawable.cat, true) {
 
     }

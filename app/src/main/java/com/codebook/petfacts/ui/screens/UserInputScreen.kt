@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.codebook.petfacts.R
+import com.codebook.petfacts.Utils
 import com.codebook.petfacts.data.UserDataUiEvents
 import com.codebook.petfacts.ui.HeaderText
 import com.codebook.petfacts.ui.SelectableCard
@@ -32,7 +33,11 @@ import com.codebook.petfacts.ui.TextFieldComponent
 import com.codebook.petfacts.ui.UserInputViewModel
 
 @Composable
-fun UserInputScreen(navController: NavHostController, userInputViewModel: UserInputViewModel) {
+fun UserInputScreen(
+    navController: NavHostController,
+    userInputViewModel: UserInputViewModel,
+    showWelcomeScreen: (Pair<String, String>) -> Unit
+) {
     val localFocusManager = LocalFocusManager.current
     Surface(
         modifier = Modifier
@@ -53,7 +58,7 @@ fun UserInputScreen(navController: NavHostController, userInputViewModel: UserIn
                 textSize = 18.sp
             )
             Spacer(modifier = Modifier.height(40.dp))
-            TextFieldComponent("Name", 16.sp) {
+            TextFieldComponent("Name", 16.sp, default = userInputViewModel.uiState.value.name) {
                 userInputViewModel.onEvent(UserDataUiEvents.UserNameEntered(it))
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -71,14 +76,14 @@ fun UserInputScreen(navController: NavHostController, userInputViewModel: UserIn
             ) {
                 SelectableCard(
                     R.drawable.cat,
-                    userInputViewModel.uiState.value.selectedAnimal == "Cat"
+                    userInputViewModel.uiState.value.selectedAnimal == Utils.CAT
                 ) {
                     localFocusManager.clearFocus()
                     userInputViewModel.onEvent(UserDataUiEvents.SelectedAnimal(it))
                 }
                 SelectableCard(
                     R.drawable.dog,
-                    userInputViewModel.uiState.value.selectedAnimal == "Dog"
+                    userInputViewModel.uiState.value.selectedAnimal == Utils.DOG
                 ) {
                     localFocusManager.clearFocus()
                     userInputViewModel.onEvent(UserDataUiEvents.SelectedAnimal(it))
@@ -88,7 +93,12 @@ fun UserInputScreen(navController: NavHostController, userInputViewModel: UserIn
             if (userInputViewModel.isValidScreen())
                 Button(onClick = {
                     localFocusManager.clearFocus()
-                    navController.navigate(Routes.WELCOME_SCREEN)
+                    showWelcomeScreen(
+                        Pair(
+                            userInputViewModel.uiState.value.name,
+                            userInputViewModel.uiState.value.selectedAnimal
+                        )
+                    )
                 }, modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Let's Cook  🚀", fontWeight = FontWeight.Light)
                 }
@@ -99,5 +109,7 @@ fun UserInputScreen(navController: NavHostController, userInputViewModel: UserIn
 @Preview
 @Composable
 fun UserInputScreenPreview() {
-    UserInputScreen(rememberNavController(), UserInputViewModel())
+    UserInputScreen(rememberNavController(), UserInputViewModel()) {
+
+    }
 }
