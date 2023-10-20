@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.codebook.petfacts.ui.UserInputViewModel
 
 @Composable
 fun WelcomeScreen(navController: NavHostController) {

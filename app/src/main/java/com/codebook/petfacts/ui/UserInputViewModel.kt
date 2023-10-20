@@ -10,11 +10,18 @@ class UserInputViewModel : ViewModel() {
 
     fun onEvent(event: UserDataUiEvents) {
         when (event) {
-            is UserDataUiEvents.UserNameEntered -> {}
-            is UserDataUiEvents.SelectedAnimal -> {
+            is UserDataUiEvents.UserNameEntered -> {
+                uiState.value = uiState.value.copy(name = event.name)
+            }
 
+            is UserDataUiEvents.SelectedAnimal -> {
+                uiState.value = uiState.value.copy(selectedAnimal = event.selectedAnimal)
             }
         }
+    }
+
+    fun isValidScreen(): Boolean {
+        return !uiState.value.name.isNullOrEmpty() && !uiState.value.selectedAnimal.isNullOrEmpty()
     }
 
 }
