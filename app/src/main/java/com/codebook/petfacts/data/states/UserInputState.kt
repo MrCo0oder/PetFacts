@@ -1,4 +1,4 @@
-package com.codebook.petfacts.data
+package com.codebook.petfacts.data.states
 
 
 data class UserInputState(

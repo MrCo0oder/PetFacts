@@ -1,9 +1,9 @@
-package com.codebook.petfacts.ui.screens.UserInput
+package com.codebook.petfacts.ui.screens.userInput
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.codebook.petfacts.data.UserDataUiEvents
-import com.codebook.petfacts.data.UserInputState
+import com.codebook.petfacts.data.states.UserDataUiEvents
+import com.codebook.petfacts.data.states.UserInputState
 
 class UserInputViewModel : ViewModel() {
     var uiState = mutableStateOf(UserInputState())

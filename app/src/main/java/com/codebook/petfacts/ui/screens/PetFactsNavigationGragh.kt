@@ -7,12 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.codebook.petfacts.data.UserInputState
-import com.codebook.petfacts.ui.screens.UserInput.UserInputViewModel
+import com.codebook.petfacts.data.states.UserInputState
+import com.codebook.petfacts.ui.screens.userInput.UserInputViewModel
 import com.codebook.petfacts.ui.screens.Routes.SELECTED_ANIMAL
 import com.codebook.petfacts.ui.screens.Routes.USER_INPUT_SCREEN
 import com.codebook.petfacts.ui.screens.Routes.USER_NAME
 import com.codebook.petfacts.ui.screens.Routes.WELCOME_SCREEN
+import com.codebook.petfacts.ui.screens.userInput.UserInputScreen
+import com.codebook.petfacts.ui.screens.welcomeScreen.WelcomeScreen
 
 @Composable
 fun PetFactsNavigationGraph(userInputViewModel: UserInputViewModel = viewModel()) {
@@ -40,7 +42,7 @@ fun PetFactsNavigationGraph(userInputViewModel: UserInputViewModel = viewModel()
 
         }
         composable(USER_INPUT_SCREEN) {
-            UserInputScreen(navController, userInputViewModel) {
+            UserInputScreen( userInputViewModel) {
                 navController.navigate(buildString {
                     append(WELCOME_SCREEN)
                     append("/")

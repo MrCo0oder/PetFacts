@@ -1,4 +1,4 @@
-package com.codebook.petfacts.ui.screens
+package com.codebook.petfacts.ui.screens.userInput
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,20 +23,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.codebook.petfacts.R
 import com.codebook.petfacts.Utils
-import com.codebook.petfacts.data.UserDataUiEvents
+import com.codebook.petfacts.data.states.UserDataUiEvents
 import com.codebook.petfacts.ui.HeaderText
 import com.codebook.petfacts.ui.SelectableCard
 import com.codebook.petfacts.ui.SubHeader
 import com.codebook.petfacts.ui.TextFieldComponent
-import com.codebook.petfacts.ui.screens.UserInput.UserInputViewModel
 
 @Composable
 fun UserInputScreen(
-    navController: NavHostController,
     userInputViewModel: UserInputViewModel,
     showWelcomeScreen: (Pair<String, String>) -> Unit
 ) {
@@ -117,7 +113,6 @@ fun UserInputScreen(
 @Preview
 @Composable
 fun UserInputScreenPreview() {
-    UserInputScreen(rememberNavController(), UserInputViewModel()) {
-
+    UserInputScreen(UserInputViewModel()) {
     }
 }
