@@ -1,4 +1,4 @@
-package com.codebook.petfacts.ui
+package com.codebook.petfacts.ui.screens.UserInput
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

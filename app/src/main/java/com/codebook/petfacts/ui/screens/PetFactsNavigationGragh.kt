@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.codebook.petfacts.data.UserInputState
-import com.codebook.petfacts.ui.UserInputViewModel
+import com.codebook.petfacts.ui.screens.UserInput.UserInputViewModel
 import com.codebook.petfacts.ui.screens.Routes.SELECTED_ANIMAL
 import com.codebook.petfacts.ui.screens.Routes.USER_INPUT_SCREEN
 import com.codebook.petfacts.ui.screens.Routes.USER_NAME

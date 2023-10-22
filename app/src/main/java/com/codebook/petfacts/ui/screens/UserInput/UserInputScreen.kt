@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,7 +32,7 @@ import com.codebook.petfacts.ui.HeaderText
 import com.codebook.petfacts.ui.SelectableCard
 import com.codebook.petfacts.ui.SubHeader
 import com.codebook.petfacts.ui.TextFieldComponent
-import com.codebook.petfacts.ui.UserInputViewModel
+import com.codebook.petfacts.ui.screens.UserInput.UserInputViewModel
 
 @Composable
 fun UserInputScreen(
@@ -39,6 +41,7 @@ fun UserInputScreen(
     showWelcomeScreen: (Pair<String, String>) -> Unit
 ) {
     val localFocusManager = LocalFocusManager.current
+    val scrollState = rememberScrollState()
     Surface(
         modifier = Modifier
             .background(color = Color.White)
@@ -48,8 +51,12 @@ fun UserInputScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(18.dp)
+                .padding(horizontal = 18.dp)
+                .verticalScroll(
+                    state = scrollState
+                )
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             HeaderText("Hello There! 😊")
             SubHeader(text = "Let's learn about you !", textSize = 24.sp)
             Spacer(modifier = Modifier.height(10.dp))
@@ -102,6 +109,7 @@ fun UserInputScreen(
                 }, modifier = Modifier.fillMaxWidth()) {
                     Text(text = "Let's Cook  🚀", fontWeight = FontWeight.Light)
                 }
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

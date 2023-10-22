@@ -2,6 +2,8 @@ package com.codebook.petfacts.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
@@ -29,6 +33,7 @@ import com.codebook.petfacts.ui.SubHeader
 
 @Composable
 fun WelcomeScreen(userInputState: UserInputState) {
+    val scrollState = rememberScrollState()
     Surface(
         modifier = Modifier
             .background(color = Color.White)
@@ -37,8 +42,10 @@ fun WelcomeScreen(userInputState: UserInputState) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(18.dp)
+                .padding(horizontal = 18.dp)
+                .verticalScroll(state = scrollState),
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             HeaderText(
                 text = "Welcome ${userInputState.name}  🥳",
                 image = if (userInputState.selectedAnimal == CAT) R.drawable.cat else R.drawable.dog
@@ -69,7 +76,7 @@ fun WelcomeScreen(userInputState: UserInputState) {
                 ) {
                     Image(
                         modifier = Modifier.size(24.dp),
-                        painter = painterResource(id = R.drawable.ic_qoutes_top),
+                        painter = painterResource(id = R.drawable.ic_quotes_top),
                         contentDescription = ""
                     )
                     Spacer(modifier = Modifier.height(20.dp))
@@ -82,9 +89,10 @@ fun WelcomeScreen(userInputState: UserInputState) {
                         modifier = Modifier
                             .size(24.dp)
                             .rotate(180f),
-                        painter = painterResource(id = R.drawable.ic_qoutes_top),
+                        painter = painterResource(id = R.drawable.ic_quotes_top),
                         contentDescription = ""
                     )
+                    Spacer(modifier = Modifier.height(20.dp))
                 }
             }
         }
