@@ -17,10 +17,10 @@ jobs:
           distribution: adopt
 
       - name: Build with Gradle
-        run: ./gradlew buildrelease
+        run: ./gradlew build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
           name: PetFacts.apk
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
