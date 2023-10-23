@@ -1,8 +1,10 @@
 package com.codebook.petfacts
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import java.io.File
 
 object Utils {
     const val CAT = "Cat"
@@ -20,5 +22,17 @@ object Utils {
             else -> false
         }
         return result
+    }
+
+    fun File.writeBitmap(
+        bitmap: Bitmap,
+        format: Bitmap.CompressFormat,
+        quality: Int
+    ) {
+        outputStream().use { out ->
+            bitmap.compress(format, quality, out)
+            out.flush()
+            out.close()
+        }
     }
 }

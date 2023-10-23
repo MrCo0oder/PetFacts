@@ -51,7 +51,7 @@ class AppModule {
             addInterceptor(httpLoggingInterceptor)
         }
         httpClient.apply {
-            readTimeout(60, TimeUnit.SECONDS)
+            readTimeout(30, TimeUnit.SECONDS)
         }
         return Retrofit.Builder()
             .baseUrl("https://dog-api.kinduff.com/")

@@ -1,4 +1,4 @@
-package com.codebook.petfacts
+package com.codebook.petfacts.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            PetFactsTheme {
+            PetFactsTheme(darkTheme = false, dynamicColor = false) {
                 FunFactApp()
             }
         }

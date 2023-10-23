@@ -53,12 +53,12 @@ fun UserInputScreen(
                 )
         ) {
             Spacer(modifier = Modifier.height(20.dp))
-            HeaderText("Hello There! 😊")
-            SubHeader(text = "Let's learn about you !", textSize = 24.sp)
+            HeaderText("Hello There! 😊", color = Color(0xFF000000))
+            SubHeader(text = "Let's learn about you !", textSize = 24.sp, Color(0xFF000000))
             Spacer(modifier = Modifier.height(10.dp))
             SubHeader(
                 text = "This app will prepare a details page based on input provided by you !",
-                textSize = 18.sp
+                textSize = 18.sp, Color(0xFF000000)
             )
             Spacer(modifier = Modifier.height(40.dp))
             TextFieldComponent("Name", 16.sp, default = userInputViewModel.uiState.value.name) {
@@ -67,7 +67,7 @@ fun UserInputScreen(
             Spacer(modifier = Modifier.height(20.dp))
             SubHeader(
                 text = "What do you like ?",
-                textSize = 18.sp
+                textSize = 18.sp, Color(0xFF000000)
             )
 
 
@@ -86,7 +86,8 @@ fun UserInputScreen(
                 }
                 SelectableCard(
                     R.drawable.dog,
-                    userInputViewModel.uiState.value.selectedAnimal == Utils.DOG
+                    userInputViewModel.uiState.value.selectedAnimal == Utils.DOG,
+                    color = Color(0xFFEDE7F6),
                 ) {
                     localFocusManager.clearFocus()
                     userInputViewModel.onEvent(UserDataUiEvents.SelectedAnimal(it))
